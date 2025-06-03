@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Igor Lyubashenko - AI & Research Expert</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-green: #00ff88;
+            --accent-green-dim: #00ff8830;
+            --card-bg: #141414;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Ambient glow effect */
+        .glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-green-dim) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glow-1 {
+            top: -300px;
+            right: -300px;
+            animation: float1 20s infinite ease-in-out;
+        }
+
+        .glow-2 {
+            bottom: -300px;
+            left: -300px;
+            animation: float2 25s infinite ease-in-out;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-50px, 50px) scale(1.1); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, -50px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--accent-green);
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main content */
+        main {
+            padding: 80px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Focus areas grid */
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .focus-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .focus-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .focus-card:hover {
+            border-color: var(--accent-green-dim);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+        }
+
+        .focus-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .focus-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .focus-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Skills section - Neural Network Design */
+        .skills-container {
+            position: relative;
+            height: 500px;
+            margin: 40px 0;
+        }
+
+        .skill-node {
+            position: absolute;
+            background: var(--card-bg);
+            border: 1px solid #2a2a2a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .skill-node::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: radial-gradient(circle, transparent, var(--accent-green-dim));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .skill-node:hover {
+            transform: scale(1.1);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .skill-node:hover::before {
+            opacity: 1;
+        }
+
+        .skill-node.core {
+            width: 150px;
+            height: 150px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-color: var(--accent-green-dim);
+        }
+
+        .skill-node.primary {
+            width: 120px;
+            height: 120px;
+            font-size: 0.95rem;
+        }
+
+        .skill-node.secondary {
+            width: 100px;
+            height: 100px;
+            font-size: 0.85rem;
+        }
+
+        /* Skill connections */
+        .skill-connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-green-dim), transparent);
+            transform-origin: left center;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        /* Positioning for neural network layout */
+        .node-1 { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .node-2 { top: 10%; left: 30%; }
+        .node-3 { top: 10%; right: 30%; }
+        .node-4 { bottom: 10%; left: 25%; }
+        .node-5 { bottom: 10%; right: 25%; }
+        .node-6 { top: 50%; left: 10%; }
+        .node-7 { top: 50%; right: 10%; }
+        .node-8 { top: 25%; left: 50%; transform: translateX(-50%); }
+        .node-9 { bottom: 25%; left: 50%; transform: translateX(-50%); }
+        .node-10 { top: 30%; left: 15%; }
+        .node-11 { top: 30%; right: 15%; }
+        .node-12 { bottom: 30%; left: 15%; }
+        .node-13 { bottom: 30%; right: 15%; }
+
+        @media (max-width: 768px) {
+            .skills-container {
+                height: 600px;
+            }
+            
+            .skill-node {
+                font-size: 0.8rem;
+            }
+            
+            .skill-node.core {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .skill-node.primary {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .skill-node.secondary {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Experience timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-green), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            opacity: 1;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -45px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-green);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .timeline-item .period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item .description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Contact section */
+        .contact {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-green);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .focus-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient glow effects -->
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+
+    <div class="container">
+        <header>
+            <h1>Igor Lyubashenko</h1>
+            <p class="tagline">Connecting dots others miss</p>
+            <p class="subtitle">Expert in leveraging AI for research • Low code automations • AI strategy</p>
+        </header>
+
+        <main>
+            <!-- Focus Areas -->
+            <section class="section">
+                <h2>Areas of Focus</h2>
+                <div class="focus-grid">
+                    <div class="focus-card">
+                        <h3>AI-Augmented Research</h3>
+                        <p>Pioneering the integration of Generative AI with traditional research methodologies. Specializing in qualitative research, QCA, CAQDAS, and data analysis using R and Python.</p>
+                    </div>
+                    <div class="focus-card">
+                        <h3>Low-Code Automations</h3>
+                        <p>Designing efficient automation solutions that bridge the gap between complex processes and user-friendly implementations, making advanced technology accessible.</p>
+                    </div>
+                    <div class="focus-card">
+                        <h3>AI Strategy & Implementation</h3>
+                        <p>Developing comprehensive AI strategies for organizations, focusing on practical applications that enhance research capabilities and operational efficiency.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills -->
+            <section class="section">
+                <h2>Core Competencies</h2>
+                <div class="skills-container">
+                    <!-- Connection lines -->
+                    <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg);"></div>
+                    <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);"></div>
+                    <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(90deg);"></div>
+                    <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(0deg);"></div>
+                    <div class="skill-connection" style="width: 150px; top: 25%; left: 50%; transform: translateX(-50%) rotate(30deg);"></div>
+                    <div class="skill-connection" style="width: 150px; top: 25%; left: 50%; transform: translateX(-50%) rotate(-30deg);"></div>
+                    <div class="skill-connection" style="width: 150px; bottom: 25%; left: 50%; transform: translateX(-50%) rotate(30deg);"></div>
+                    <div class="skill-connection" style="width: 150px; bottom: 25%; left: 50%; transform: translateX(-50%) rotate(-30deg);"></div>
+                    
+                    <!-- Core competency -->
+                    <div class="skill-node core node-1">AI & Research<br>Integration</div>
+                    
+                    <!-- Primary skills -->
+                    <div class="skill-node primary node-2">Machine<br>Learning</div>
+                    <div class="skill-node primary node-3">Large Language<br>Models</div>
+                    <div class="skill-node primary node-4">Qualitative<br>Research</div>
+                    <div class="skill-node primary node-5">Social<br>Science</div>
+                    
+                    <!-- Secondary skills -->
+                    <div class="skill-node secondary node-6">Python</div>
+                    <div class="skill-node secondary node-7">R</div>
+                    <div class="skill-node secondary node-8">CAQDAS</div>
+                    <div class="skill-node secondary node-9">Policy<br>Design</div>
+                    <div class="skill-node secondary node-10">Data<br>Analysis</div>
+                    <div class="skill-node secondary node-11">Systems<br>Thinking</div>
+                    <div class="skill-node secondary node-12">Research<br>Methods</div>
+                    <div class="skill-node secondary node-13">Public<br>Policy</div>
+                </div>
+            </section>
+
+            <!-- Experience Overview -->
+            <section class="section">
+                <h2>Experience Highlights</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Associate Professor & Principal Investigator</h3>
+                        <p class="period">2018 - Present • Uniwersytet SWPS</p>
+                        <p class="description">Leading research at the Center for Policy Design and Evaluation, focusing on migration policy analysis and teaching courses in public policy design, systems thinking, and qualitative research methodology.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Expert in AI Application for Research</h3>
+                        <p class="period">2024 - Present • EGO S.C.</p>
+                        <p class="description">Specializing in implementing AI solutions to enhance research methodologies and data analysis processes.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>12+ Years in Academia & Research</h3>
+                        <p class="period">Various Institutions</p>
+                        <p class="description">Extensive experience spanning teaching, research, policy analysis, and international relations across multiple prestigious institutions in Poland.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Contact -->
+        <footer class="contact">
+            <h2>Let's Connect</h2>
+            <div class="contact-links">
+                <a href="mailto:igor.lyubashenko@gmail.com" class="contact-link">Email</a>
+                <a href="https://www.linkedin.com/in/igorlyubashenko" class="contact-link" target="_blank">LinkedIn</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

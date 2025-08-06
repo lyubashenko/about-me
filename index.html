@@ -29,6 +29,48 @@
             overflow-x: hidden;
         }
 
+        /* Language switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: var(--card-bg);
+            border: 1px solid #2a2a2a;
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .lang-btn.active {
+            background: var(--accent-green);
+            color: var(--bg-primary);
+            border-color: var(--accent-green);
+        }
+
+        /* Language content */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
         /* Ambient glow effect */
         .glow-orb {
             position: fixed;
@@ -386,128 +428,288 @@
                 flex-direction: column;
                 gap: 15px;
             }
+
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Language switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('pl')">PL</button>
+    </div>
+
     <!-- Ambient glow effects -->
     <div class="glow-orb glow-1"></div>
     <div class="glow-orb glow-2"></div>
 
     <div class="container">
-        <header>
-            <h1>Igor Lyubashenko</h1>
-            <p class="tagline">Connecting dots others miss</p>
-            <p class="subtitle">Expert in leveraging AI for research • Low code automations • AI strategy</p>
-        </header>
+        <!-- English Content -->
+        <div class="lang-content active" id="en-content">
+            <header>
+                <h1>Igor Lyubashenko</h1>
+                <p class="tagline">Connecting dots others miss</p>
+                <p class="subtitle">Expert in leveraging AI for research • Low code automations • AI strategy</p>
+            </header>
 
-        <main>
-            <!-- Focus Areas -->
-            <section class="section">
-                <h2>Areas of Focus</h2>
-                <div class="focus-grid">
-                    <div class="focus-card">
-                        <h3>AI-Augmented Research</h3>
-                        <p>Pioneering the integration of Generative AI with traditional research methodologies. Specializing in qualitative research, QCA, CAQDAS, and data analysis using R and Python.</p>
-                    </div>
-                    <div class="focus-card">
-                        <h3>Low-Code Automations</h3>
-                        <p>Designing efficient automation solutions that bridge the gap between complex processes and user-friendly implementations, making advanced technology accessible.</p>
-                    </div>
-                    <div class="focus-card">
-                        <h3>AI Strategy & Implementation</h3>
-                        <p>Developing comprehensive AI strategies for organizations, focusing on practical applications that enhance research capabilities and operational efficiency.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Skills -->
-            <section class="section">
-                <h2>Core Competencies</h2>
-                <div class="skills-container">
-                    <!-- Connection lines -->
-                    <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg);"></div>
-                    <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);"></div>
-                    <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(90deg);"></div>
-                    <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(0deg);"></div>
-                    <div class="skill-connection" style="width: 150px; top: 25%; left: 50%; transform: translateX(-50%) rotate(30deg);"></div>
-                    <div class="skill-connection" style="width: 150px; top: 25%; left: 50%; transform: translateX(-50%) rotate(-30deg);"></div>
-                    <div class="skill-connection" style="width: 150px; bottom: 25%; left: 50%; transform: translateX(-50%) rotate(30deg);"></div>
-                    <div class="skill-connection" style="width: 150px; bottom: 25%; left: 50%; transform: translateX(-50%) rotate(-30deg);"></div>
-                    
-                    <!-- Core competency -->
-                    <div class="skill-node core node-1">AI & Research<br>Integration</div>
-                    
-                    <!-- Primary skills -->
-                    <div class="skill-node primary node-2">Machine<br>Learning</div>
-                    <div class="skill-node primary node-3">Large Language<br>Models</div>
-                    <div class="skill-node primary node-4">Qualitative<br>Research</div>
-                    <div class="skill-node primary node-5">Social<br>Science</div>
-                    
-                    <!-- Secondary skills -->
-                    <div class="skill-node secondary node-6">Python</div>
-                    <div class="skill-node secondary node-7">R</div>
-                    <div class="skill-node secondary node-8">CAQDAS</div>
-                    <div class="skill-node secondary node-9">Policy<br>Design</div>
-                    <div class="skill-node secondary node-10">Data<br>Analysis</div>
-                    <div class="skill-node secondary node-11">Systems<br>Thinking</div>
-                    <div class="skill-node secondary node-12">Research<br>Methods</div>
-                    <div class="skill-node secondary node-13">Public<br>Policy</div>
-                </div>
-            </section>
-
-            <!-- Experience Overview -->
-            <section class="section">
-                <h2>Experience Highlights</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h3>Associate Professor & Principal Investigator</h3>
-                        <p class="period">2018 - Present • Uniwersytet SWPS</p>
-                        <p class="description">Leading research at the Center for Policy Design and Evaluation, focusing on migration policy analysis and teaching courses in public policy design, systems thinking, and qualitative research methodology.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>Expert in AI Application for Research</h3>
-                        <p class="period">2024 - Present • EGO S.C.</p>
-                        <p class="description">Specializing in implementing AI solutions to enhance research methodologies and data analysis processes.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>12+ Years in Academia & Research</h3>
-                        <p class="period">Various Institutions</p>
-                        <p class="description">Extensive experience spanning teaching, research, policy analysis, and international relations across multiple prestigious institutions in Poland.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects -->
-            <section class="section">
-                <h2>Featured Projects</h2>
-                <div class="focus-grid">
-                    <div class="focus-card">
-                        <h3>Analiza Opinii - Python Playground</h3>
-                        <p>Zaawansowane narzędzie do analizy opinii wykorzystujące sztuczną inteligencję. Platforma umożliwia automatyczną analizę danych z plików Excel z wykorzystaniem algorytmów AI.</p>
-                        <div style="margin-top: 20px;">
-                            <a href="https://ai-coder2-679165195162.europe-west1.run.app/" target="_blank" class="contact-link" style="display: inline-block; margin-top: 10px;">Zobacz Projekt</a>
+            <main>
+                <!-- Focus Areas -->
+                <section class="section">
+                    <h2>Areas of Focus</h2>
+                    <div class="focus-grid">
+                        <div class="focus-card">
+                            <h3>AI-Augmented Research</h3>
+                            <p>Pioneering the integration of Generative AI with traditional research methodologies. Specializing in qualitative research, QCA, CAQDAS, and data analysis using R and Python.</p>
+                        </div>
+                        <div class="focus-card">
+                            <h3>Low-Code Automations</h3>
+                            <p>Designing efficient automation solutions that bridge the gap between complex processes and user-friendly implementations, making advanced technology accessible.</p>
+                        </div>
+                        <div class="focus-card">
+                            <h3>AI Strategy & Implementation</h3>
+                            <p>Developing comprehensive AI strategies for organizations, focusing on practical applications that enhance research capabilities and operational efficiency.</p>
                         </div>
                     </div>
-                    <div class="focus-card">
-                        <h3>Analiza Jakościowa AI</h3>
-                        <p>Automatyczna analiza transkrypcji wywiadów z wykorzystaniem sztucznej inteligencji. System wykorzystuje API Gemini do kodowania fragmentów i generowania szczegółowych notatek analitycznych.</p>
-                        <div style="margin-top: 20px;">
-                            <a href="https://qualitative-analyzer-service-679165195162.europe-central2.run.app/" target="_blank" class="contact-link" style="display: inline-block; margin-top: 10px;">Zobacz Projekt</a>
+                </section>
+
+                <!-- Skills -->
+                <section class="section">
+                    <h2>Core Competencies</h2>
+                    <div class="skills-container">
+                        <!-- Connection lines -->
+                        <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg);"></div>
+                        <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);"></div>
+                        <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(90deg);"></div>
+                        <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(0deg);"></div>
+                        <div class="skill-connection" style="width: 150px; top: 25%; left: 50%; transform: translateX(-50%) rotate(30deg);"></div>
+                        <div class="skill-connection" style="width: 150px; top: 25%; left: 50%; transform: translateX(-50%) rotate(-30deg);"></div>
+                        <div class="skill-connection" style="width: 150px; bottom: 25%; left: 50%; transform: translateX(-50%) rotate(30deg);"></div>
+                        <div class="skill-connection" style="width: 150px; bottom: 25%; left: 50%; transform: translateX(-50%) rotate(-30deg);"></div>
+                        
+                        <!-- Core competency -->
+                        <div class="skill-node core node-1">AI & Research<br>Integration</div>
+                        
+                        <!-- Primary skills -->
+                        <div class="skill-node primary node-2">Machine<br>Learning</div>
+                        <div class="skill-node primary node-3">Large Language<br>Models</div>
+                        <div class="skill-node primary node-4">Qualitative<br>Research</div>
+                        <div class="skill-node primary node-5">Social<br>Science</div>
+                        
+                        <!-- Secondary skills -->
+                        <div class="skill-node secondary node-6">Python</div>
+                        <div class="skill-node secondary node-7">R</div>
+                        <div class="skill-node secondary node-8">CAQDAS</div>
+                        <div class="skill-node secondary node-9">Policy<br>Design</div>
+                        <div class="skill-node secondary node-10">Data<br>Analysis</div>
+                        <div class="skill-node secondary node-11">Systems<br>Thinking</div>
+                        <div class="skill-node secondary node-12">Research<br>Methods</div>
+                        <div class="skill-node secondary node-13">Public<br>Policy</div>
+                    </div>
+                </section>
+
+                <!-- Experience Overview -->
+                <section class="section">
+                    <h2>Experience Highlights</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>Associate Professor & Principal Investigator</h3>
+                            <p class="period">2018 - Present • Uniwersytet SWPS</p>
+                            <p class="description">Leading research at the Center for Policy Design and Evaluation, focusing on migration policy analysis and teaching courses in public policy design, systems thinking, and qualitative research methodology.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Expert in AI Application for Research</h3>
+                            <p class="period">2024 - Present • EGO S.C.</p>
+                            <p class="description">Specializing in implementing AI solutions to enhance research methodologies and data analysis processes.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>12+ Years in Academia & Research</h3>
+                            <p class="period">Various Institutions</p>
+                            <p class="description">Extensive experience spanning teaching, research, policy analysis, and international relations across multiple prestigious institutions in Poland.</p>
                         </div>
                     </div>
-                </div>
-            </section>
-        </main>
+                </section>
 
-        <!-- Contact -->
-        <footer class="contact">
-            <h2>Let's Connect</h2>
-            <div class="contact-links">
-                <a href="mailto:igor.lyubashenko@gmail.com" class="contact-link">Email</a>
-                <a href="https://www.linkedin.com/in/igorlyubashenko" class="contact-link" target="_blank">LinkedIn</a>
-            </div>
-        </footer>
+                <!-- Projects -->
+                <section class="section">
+                    <h2>Experimental AI Integration Examples</h2>
+                    <div class="focus-grid">
+                        <div class="focus-card">
+                            <h3>Opinion Analysis - Python Playground (Available in Polish)</h3>
+                            <p>A simple yet powerful tool for analyzing opinions and social media comments. Upload a file with multiple opinions and get a comprehensive table with sentiment analysis and main themes. The app uniquely displays the underlying code, prompts, and model settings, allowing users to feel like programmers who can modify the AI's behavior.</p>
+                            <div style="margin-top: 20px;">
+                                <a href="https://ai-coder2-679165195162.europe-west1.run.app/" target="_blank" class="contact-link" style="display: inline-block; margin-top: 10px;">View Project</a>
+                            </div>
+                        </div>
+                        <div class="focus-card">
+                            <h3>Qualitative Analysis AI (Available in Polish)</h3>
+                            <p>Automatic analysis of interview transcripts using artificial intelligence. The system utilizes Gemini API for coding fragments and generating detailed analytical notes.</p>
+                            <div style="margin-top: 20px;">
+                                <a href="https://qualitative-analyzer-service-679165195162.europe-central2.run.app/" target="_blank" class="contact-link" style="display: inline-block; margin-top: 10px;">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Contact -->
+            <footer class="contact">
+                <h2>Let's Connect</h2>
+                <div class="contact-links">
+                    <a href="mailto:igor.lyubashenko@gmail.com" class="contact-link">Email</a>
+                    <a href="https://www.linkedin.com/in/igorlyubashenko" class="contact-link" target="_blank">LinkedIn</a>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Polish Content -->
+        <div class="lang-content" id="pl-content">
+            <header>
+                <h1>Igor Lyubashenko</h1>
+                <p class="tagline">Łączę punkty, które inni przeoczyli</p>
+                <p class="subtitle">Ekspert w wykorzystaniu AI w badaniach • Automatyzacje low-code • Strategia AI</p>
+            </header>
+
+            <main>
+                <!-- Focus Areas -->
+                <section class="section">
+                    <h2>Obszary Działalności</h2>
+                    <div class="focus-grid">
+                        <div class="focus-card">
+                            <h3>Badania Wspomagane AI</h3>
+                            <p>Pionierska integracja generatywnej sztucznej inteligencji z tradycyjnymi metodologiami badawczymi. Specjalizacja w badaniach jakościowych, QCA, CAQDAS i analizie danych przy użyciu R i Python.</p>
+                        </div>
+                        <div class="focus-card">
+                            <h3>Automatyzacje Low-Code</h3>
+                            <p>Projektowanie efektywnych rozwiązań automatyzacyjnych, które łączą złożone procesy z przyjaznymi dla użytkownika implementacjami, czyniąc zaawansowaną technologię dostępną.</p>
+                        </div>
+                        <div class="focus-card">
+                            <h3>Strategia i Implementacja AI</h3>
+                            <p>Rozwijanie kompleksowych strategii AI dla organizacji, skupiając się na praktycznych zastosowaniach, które zwiększają możliwości badawcze i efektywność operacyjną.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Skills -->
+                <section class="section">
+                    <h2>Kluczowe Kompetencje</h2>
+                    <div class="skills-container">
+                        <!-- Connection lines -->
+                        <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg);"></div>
+                        <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);"></div>
+                        <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(90deg);"></div>
+                        <div class="skill-connection" style="width: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(0deg);"></div>
+                        <div class="skill-connection" style="width: 150px; top: 25%; left: 50%; transform: translateX(-50%) rotate(30deg);"></div>
+                        <div class="skill-connection" style="width: 150px; top: 25%; left: 50%; transform: translateX(-50%) rotate(-30deg);"></div>
+                        <div class="skill-connection" style="width: 150px; bottom: 25%; left: 50%; transform: translateX(-50%) rotate(30deg);"></div>
+                        <div class="skill-connection" style="width: 150px; bottom: 25%; left: 50%; transform: translateX(-50%) rotate(-30deg);"></div>
+                        
+                        <!-- Core competency -->
+                        <div class="skill-node core node-1">Integracja AI<br>& Badań</div>
+                        
+                        <!-- Primary skills -->
+                        <div class="skill-node primary node-2">Uczenie<br>Maszyn</div>
+                        <div class="skill-node primary node-3">Duże Modele<br>Językowe</div>
+                        <div class="skill-node primary node-4">Badania<br>Jakościowe</div>
+                        <div class="skill-node primary node-5">Nauki<br>Społeczne</div>
+                        
+                        <!-- Secondary skills -->
+                        <div class="skill-node secondary node-6">Python</div>
+                        <div class="skill-node secondary node-7">R</div>
+                        <div class="skill-node secondary node-8">CAQDAS</div>
+                        <div class="skill-node secondary node-9">Projektowanie<br>Polityk</div>
+                        <div class="skill-node secondary node-10">Analiza<br>Danych</div>
+                        <div class="skill-node secondary node-11">Myślenie<br>Systemowe</div>
+                        <div class="skill-node secondary node-12">Metody<br>Badawcze</div>
+                        <div class="skill-node secondary node-13">Polityka<br>Publiczna</div>
+                    </div>
+                </section>
+
+                <!-- Experience Overview -->
+                <section class="section">
+                    <h2>Doświadczenie Zawodowe</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>Profesor Nadzwyczajny & Główny Badacz</h3>
+                            <p class="period">2018 - Obecnie • Uniwersytet SWPS</p>
+                            <p class="description">Kierowanie badaniami w Centrum Projektowania i Ewaluacji Polityk, skupiając się na analizie polityki migracyjnej i prowadzeniu kursów z projektowania polityk publicznych, myślenia systemowego i metodologii badań jakościowych.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Ekspert w Zastosowaniu AI w Badaniach</h3>
+                            <p class="period">2024 - Obecnie • EGO S.C.</p>
+                            <p class="description">Specjalizacja w implementacji rozwiązań AI w celu zwiększenia metodologii badawczych i procesów analizy danych.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>12+ Lat w Akademii i Badaniach</h3>
+                            <p class="period">Różne Instytucje</p>
+                            <p class="description">Rozległe doświadczenie obejmujące nauczanie, badania, analizę polityk i stosunki międzynarodowe w wielu prestiżowych instytucjach w Polsce.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projects -->
+                <section class="section">
+                    <h2>Eksperymentalne Przykłady Integracji AI</h2>
+                    <div class="focus-grid">
+                        <div class="focus-card">
+                            <h3>Analiza Opinii - Python Playground</h3>
+                            <p>Zaawansowane narzędzie do analizy opinii wykorzystujące sztuczną inteligencję. Platforma umożliwia automatyczną analizę danych z plików Excel z wykorzystaniem algorytmów AI.</p>
+                            <div style="margin-top: 20px;">
+                                <a href="https://ai-coder2-679165195162.europe-west1.run.app/" target="_blank" class="contact-link" style="display: inline-block; margin-top: 10px;">Zobacz Projekt</a>
+                            </div>
+                        </div>
+                        <div class="focus-card">
+                            <h3>Analiza Jakościowa AI</h3>
+                            <p>Automatyczna analiza transkrypcji wywiadów z wykorzystaniem sztucznej inteligencji. System wykorzystuje API Gemini do kodowania fragmentów i generowania szczegółowych notatek analitycznych.</p>
+                            <div style="margin-top: 20px;">
+                                <a href="https://qualitative-analyzer-service-679165195162.europe-central2.run.app/" target="_blank" class="contact-link" style="display: inline-block; margin-top: 10px;">Zobacz Projekt</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Contact -->
+            <footer class="contact">
+                <h2>Skontaktujmy Się</h2>
+                <div class="contact-links">
+                    <a href="mailto:igor.lyubashenko@gmail.com" class="contact-link">Email</a>
+                    <a href="https://www.linkedin.com/in/igorlyubashenko" class="contact-link" target="_blank">LinkedIn</a>
+                </div>
+            </footer>
+        </div>
     </div>
+
+    <script>
+        // Language switching functionality
+        function switchLanguage(lang) {
+            // Hide all language content
+            const allContent = document.querySelectorAll('.lang-content');
+            allContent.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected language content
+            const selectedContent = document.getElementById(lang + '-content');
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+            
+            // Update language buttons
+            const allButtons = document.querySelectorAll('.lang-btn');
+            allButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeButton = event.target;
+            activeButton.classList.add('active');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+    </script>
 </body>
 </html>

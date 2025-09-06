@@ -29,6 +29,42 @@
             overflow-x: hidden;
         }
 
+        /* Navigation menu */
+        .nav-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid #2a2a2a;
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .nav-btn.active {
+            background: var(--accent-green);
+            color: var(--bg-primary);
+            border-color: var(--accent-green);
+        }
+
         /* Language switcher */
         .language-switcher {
             position: fixed;
@@ -568,6 +604,18 @@
                 right: 10px;
             }
 
+            .nav-menu {
+                top: 10px;
+                left: 10px;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .nav-btn {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
             .project-card {
                 padding: 20px;
             }
@@ -587,6 +635,17 @@
     </style>
 </head>
 <body>
+    <!-- Navigation menu -->
+    <div class="nav-menu">
+        <a href="#about" class="nav-btn active" onclick="scrollToSection('about')">About</a>
+        <a href="#focus" class="nav-btn" onclick="scrollToSection('focus')">Focus</a>
+        <a href="#skills" class="nav-btn" onclick="scrollToSection('skills')">Skills</a>
+        <a href="#experience" class="nav-btn" onclick="scrollToSection('experience')">Experience</a>
+        <a href="#projects" class="nav-btn" onclick="scrollToSection('projects')">Projects</a>
+        <a href="#portfolio" class="nav-btn" onclick="scrollToSection('portfolio')">Portfolio</a>
+        <a href="#contact" class="nav-btn" onclick="scrollToSection('contact')">Contact</a>
+    </div>
+
     <!-- Language switcher -->
     <div class="language-switcher">
         <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
@@ -600,7 +659,7 @@
     <div class="container">
         <!-- English Content -->
         <div class="lang-content active" id="en-content">
-            <header>
+            <header id="about">
                 <h1>Igor Lyubashenko</h1>
                 <p class="tagline">Connecting dots others miss</p>
                 <p class="subtitle">Expert in leveraging AI for research • Low code automations • AI strategy</p>
@@ -608,7 +667,7 @@
 
             <main>
                 <!-- Focus Areas -->
-                <section class="section">
+                <section class="section" id="focus">
                     <h2>Areas of Focus</h2>
                     <div class="focus-grid">
                         <div class="focus-card">
@@ -627,7 +686,7 @@
                 </section>
 
                 <!-- Skills -->
-                <section class="section">
+                <section class="section" id="skills">
                     <h2>Core Competencies</h2>
                     <div class="skills-container">
                         <!-- Connection lines -->
@@ -662,7 +721,7 @@
                 </section>
 
                 <!-- Experience Overview -->
-                <section class="section">
+                <section class="section" id="experience">
                     <h2>Experience Highlights</h2>
                     <div class="timeline">
                         <div class="timeline-item">
@@ -684,7 +743,7 @@
                 </section>
 
                 <!-- Projects -->
-                <section class="section">
+                <section class="section" id="projects">
                     <h2>Experimental AI Integration Examples</h2>
                     <div class="focus-grid">
                         <div class="focus-card">
@@ -705,7 +764,7 @@
                 </section>
 
                 <!-- Portfolio -->
-                <section class="section">
+                <section class="section" id="portfolio">
                     <h2>Analytical Projects Portfolio</h2>
                     
                     <!-- Universal Tools -->
@@ -714,7 +773,6 @@
                         
                         <div class="project-card">
                             <h4>Universal Qualitative Coder</h4>
-                            <p class="project-file">general_qual_coder_ollama_20250727.py</p>
                             <p class="project-description">A comprehensive tool supporting qualitative data analysis. The script automates the coding process - assigning thematic labels to text fragments from various sources such as interview transcripts, notes, or documents.</p>
                             
                             <div class="project-process">
@@ -738,22 +796,21 @@
                             <div class="mermaid-diagram">
                                 <div class="mermaid">
 graph TD
-    A["Start: System kodów (Excel) i pliki z danymi (.xlsx, .docx, .md)"] --> B{"Wczytanie i przygotowanie danych"};
-    B --> C{"Pętla po każdym fragmencie tekstu"};
-    C --> D{"Pętla po każdym kodzie z systemu"};
-    D -- "Zapytanie" --> E["Analiza przez lokalny LLM"];
-    E -- "Wynik" --> F{"Decyzja: Kodować? + Uzasadnienie, Insight, Cytat"};
+    A["Start: Code system (Excel) and data files (.xlsx, .docx, .md)"] --> B{"Load and prepare data"};
+    B --> C{"Loop through each text fragment"};
+    C --> D{"Loop through each code in system"};
+    D -- "Query" --> E["Analysis by local LLM"];
+    E -- "Result" --> F{"Decision: Code? + Justification, Insight, Quote"};
     F --> D;
     D --> C;
-    C --> G["Agregacja wszystkich wyników"];
-    G --> H["Koniec: Zbiorczy plik Excel z zakodowanymi danymi"];
+    C --> G["Aggregate all results"];
+    G --> H["End: Comprehensive Excel file with coded data"];
                                 </div>
                             </div>
                         </div>
 
                         <div class="project-card">
                             <h4>Desk Research Assistant</h4>
-                            <p class="project-file">general_desk_researcher_gemini.py</p>
                             <p class="project-description">An advanced tool that automates the process of creating literature reviews (desk research) for research offers and reports. The script transforms a collection of scientific documents (PDF) and research questions into a coherent analytical report.</p>
                             
                             <div class="project-process">
@@ -775,16 +832,16 @@ graph TD
                             <div class="mermaid-diagram">
                                 <div class="mermaid">
 graph TD
-    A["Start: Pytania badawcze, folder z plikami PDF"] --> B{"Pętla po każdym pliku PDF"};
-    B --> C{"Trzystopniowa analiza"};
-    C -- "Krok 1" --> D["Wstępna analiza przez Gemini API"];
-    D -- "Krok 2" --> E["Krytyka analizy przez Gemini API"];
-    E -- "Krok 3" --> F["Finalna, poprawiona synteza przez Gemini API"];
-    F --> G["Zapisanie wyniku analizy pliku"];
+    A["Start: Research questions, PDF files folder"] --> B{"Loop through each PDF file"};
+    B --> C{"Three-step analysis"};
+    C -- "Step 1" --> D["Initial analysis via Gemini API"];
+    D -- "Step 2" --> E["Analysis critique via Gemini API"];
+    E -- "Step 3" --> F["Final, improved synthesis via Gemini API"];
+    F --> G["Save file analysis result"];
     G --> B;
-    B --> H{"Synteza wszystkich analiz"};
-    H -- "Gemini API" --> I["Wygenerowanie raportu - przeglądu literatury"];
-    I --> J["Koniec: Plik Markdown z gotowym przeglądem"];
+    B --> H{"Synthesis of all analyses"};
+    H -- "Gemini API" --> I["Generate literature review report"];
+    I --> J["End: Markdown file with ready review"];
                                 </div>
                             </div>
                         </div>
@@ -796,7 +853,6 @@ graph TD
                         
                         <div class="project-card">
                             <h4>Advanced PDF Document Search</h4>
-                            <p class="project-file">specific_pdf_search.py</p>
                             <p class="project-description">Automation of the process of searching for key information in a large database of multilingual PDF documents. The tool was created for a project where it was necessary to quickly identify text fragments concerning a specific topic in hundreds of files.</p>
                             
                             <div class="project-process">
@@ -819,22 +875,21 @@ graph TD
                             <div class="mermaid-diagram">
                                 <div class="mermaid">
 graph TD 
-A["Start: Folder z plikami PDF i lista słów kluczowych"] --> B{"Analiza każdego pliku PDF"};
-B --> C["Normalizacja tekstu"]; 
-C --> D{"Wyszukiwanie wieloetapowe"}; 
+A["Start: PDF files folder and keywords list"] --> B{"Analyze each PDF file"};
+B --> C["Text normalization"]; 
+C --> D{"Multi-stage search"}; 
 D --> E["(1) Fuzzy Matching"]; 
 D --> F["(2) Stemming"]; 
-D --> G["(3) N-gramy"]; 
-C --> H["Ekstrakcja pasujących fragmentów"]; 
-H --> I["Zapis wyników"]; 
-I --> J["Koniec: Plik Excel z wynikami"];
+D --> G["(3) N-grams"]; 
+C --> H["Extract matching fragments"]; 
+H --> I["Save results"]; 
+I --> J["End: Excel file with results"];
                                 </div>
                             </div>
                         </div>
 
                         <div class="project-card">
                             <h4>LLM Respondent Simulator</h4>
-                            <p class="project-file">specific_llm_respondent_simulator_nowa polityka.py</p>
                             <p class="project-description">A tool for generating synthetic but realistic survey data. The goal was to simulate responses to a psychological questionnaire (Ryff Well-being Scale) in response to a hypothetical change in the company (introduction of a new policy supporting employees' personal branding).</p>
                             
                             <div class="project-process">
@@ -851,21 +906,20 @@ I --> J["Koniec: Plik Excel z wynikami"];
                             <div class="mermaid-diagram">
                                 <div class="mermaid">
 graph TD
-    A["Start: Profile demograficzne, kwestionariusz, kontekst sytuacji"] --> B{"Tworzenie 'osobowości' dla LLM"};
-    B --> C["System Prompt: Instrukcje dla modelu"];
-    C --> D{"Pętla po pytaniach ankiety"};
-    D -- "Pytanie" --> E["Generowanie odpowiedzi przez lokalny LLM"];
-    E -- "Odpowiedź (1-6)" --> D;
-    D --> F["Zebranie wszystkich odpowiedzi"];
-    F --> G["Zapis do bazy danych"];
-    G --> H["Koniec: Plik CSV z wynikami"];
+    A["Start: Demographic profiles, questionnaire, situation context"] --> B{"Create 'personality' for LLM"};
+    B --> C["System Prompt: Instructions for model"];
+    C --> D{"Loop through survey questions"};
+    D -- "Question" --> E["Generate response via local LLM"];
+    E -- "Response (1-6)" --> D;
+    D --> F["Collect all responses"];
+    F --> G["Save to database"];
+    G --> H["End: CSV file with results"];
                                 </div>
                             </div>
                         </div>
 
                         <div class="project-card">
                             <h4>Two-Stage Classification and Data Extraction from Applications</h4>
-                            <p class="project-file">specific_klasyfikacja_wnioski.py</p>
                             <p class="project-description">Development of an efficient process for analyzing hundreds of project applications to identify and structure very specific information - in this case concerning employment of people with disabilities.</p>
                             
                             <div class="project-process">
@@ -886,20 +940,19 @@ graph TD
                             <div class="mermaid-diagram">
                                 <div class="mermaid">
 graph TD
-    A["Start: Plik CSV z fragmentami tekstów"] --> B{"Etap 1: Klasyfikacja"};
-    B -- "Każdy fragment" --> C["LLM: Czy zawiera info o zatrudnieniu OzN?"];
-    C -- "Decyzja TAK/NIE" --> D{"Filtrowanie"};
-    D -- "Fragmenty 'TAK'" --> E{"Etap 2: Ekstrakcja szczegółów"};
-    E -- "Każdy fragment 'TAK'" --> F["LLM: Wyodrębnij dane strukturalne"];
-    F --> G["Agregacja wyników"];
-    G --> H["Koniec: Plik CSV z ustrukturyzowanymi danymi"];
+    A["Start: CSV file with text fragments"] --> B{"Stage 1: Classification"};
+    B -- "Each fragment" --> C["LLM: Does it contain info about employing PwD?"];
+    C -- "YES/NO decision" --> D{"Filtering"};
+    D -- "Fragments 'YES'" --> E{"Stage 2: Detail extraction"};
+    E -- "Each 'YES' fragment" --> F["LLM: Extract structural data"];
+    F --> G["Aggregate results"];
+    G --> H["End: CSV file with structured data"];
                                 </div>
                             </div>
                         </div>
 
                         <div class="project-card">
                             <h4>Narrative and Theme Identification in Texts</h4>
-                            <p class="project-file">specific_keyword_extractor_tematy.py</p>
                             <p class="project-description">Automation of the process of thematic analysis of a large number of short texts, such as social media posts or articles. The goal was to classify each entry according to a predefined set of narratives or themes (in this case related to the Green Deal).</p>
                             
                             <div class="project-process">
@@ -917,20 +970,19 @@ graph TD
                             <div class="mermaid-diagram">
                                 <div class="mermaid">
 graph TD
-    A["Start: Plik Excel z tekstami i system kodowania"] --> B{"Pętla po każdym tekście"};
-    B --> C["Analiza tekstu przez lokalny LLM"];
-    C --> D{"Decyzja: Do której narracji/tematu pasuje?"};
-    D --> E["Przypisanie etykiet"];
+    A["Start: Excel file with texts and coding system"] --> B{"Loop through each text"};
+    B --> C["Text analysis via local LLM"];
+    C --> D{"Decision: Which narrative/theme fits?"};
+    D --> E["Assign labels"];
     E --> B;
-    B --> F["Dodanie nowej kolumny z wynikami"];
-    F --> G["Koniec: Plik Excel z przypisanymi kategoriami"];
+    B --> F["Add new column with results"];
+    F --> G["End: Excel file with assigned categories"];
                                 </div>
                             </div>
                         </div>
 
                         <div class="project-card">
                             <h4>Data Extraction and Structuring from Meeting Minutes</h4>
-                            <p class="project-file">specific_data_extraction_8.py</p>
                             <p class="project-description">Automation of the tedious process of analyzing minutes from monitoring committee meetings. The goal was to transform a series of PDF documents into a structured database that tracks committee composition, meeting attendance, and substantive activity of individual members.</p>
                             
                             <div class="project-process">
@@ -954,15 +1006,15 @@ graph TD
                             <div class="mermaid-diagram">
                                 <div class="mermaid">
 graph TD
-    A["Start: Pliki PDF (skład komitetu, protokoły)"] --> B{"Analiza składu komitetu"};
-    B -- "Gemini API" --> C["Stworzenie bazowej listy członków"];
-    C --> D{"Pętla po każdym protokole"};
-    D -- "Gemini API" --> E["Ekstrakcja listy obecności"];
-    D -- "Gemini API" --> F["Identyfikacja mówców i podsumowanie wypowiedzi"];
-    E & F --> G["Aktualizacja bazy danych o obecność i aktywność"];
+    A["Start: PDF files (committee composition, minutes)"] --> B{"Analyze committee composition"};
+    B -- "Gemini API" --> C["Create base member list"];
+    C --> D{"Loop through each minutes"};
+    D -- "Gemini API" --> E["Extract attendance list"];
+    D -- "Gemini API" --> F["Identify speakers and summarize statements"];
+    E & F --> G["Update database with attendance and activity"];
     G --> D;
-    D --> H["Zapis wyników"];
-    H --> I["Koniec: Dwa pliki Excel (format szeroki i długi)"];
+    D --> H["Save results"];
+    H --> I["End: Two Excel files (wide and long format)"];
                                 </div>
                             </div>
                         </div>
@@ -971,7 +1023,7 @@ graph TD
             </main>
 
             <!-- Contact -->
-            <footer class="contact">
+            <footer class="contact" id="contact">
                 <h2>Let's Connect</h2>
                 <div class="contact-links">
                     <a href="mailto:igor.lyubashenko@gmail.com" class="contact-link">Email</a>
@@ -982,7 +1034,7 @@ graph TD
 
         <!-- Polish Content -->
         <div class="lang-content" id="pl-content">
-            <header>
+            <header id="about">
                 <h1>Igor Lyubashenko</h1>
                 <p class="tagline">Łączę punkty, które inni przeoczyli</p>
                 <p class="subtitle">Ekspert w wykorzystaniu AI w badaniach • Automatyzacje low-code • Strategia AI</p>
@@ -990,7 +1042,7 @@ graph TD
 
             <main>
                 <!-- Focus Areas -->
-                <section class="section">
+                <section class="section" id="focus">
                     <h2>Obszary Działalności</h2>
                     <div class="focus-grid">
                         <div class="focus-card">
@@ -1009,7 +1061,7 @@ graph TD
                 </section>
 
                 <!-- Skills -->
-                <section class="section">
+                <section class="section" id="skills">
                     <h2>Kluczowe Kompetencje</h2>
                     <div class="skills-container">
                         <!-- Connection lines -->
@@ -1044,7 +1096,7 @@ graph TD
                 </section>
 
                 <!-- Experience Overview -->
-                <section class="section">
+                <section class="section" id="experience">
                     <h2>Doświadczenie Zawodowe</h2>
                     <div class="timeline">
                         <div class="timeline-item">
@@ -1066,7 +1118,7 @@ graph TD
                 </section>
 
                 <!-- Projects -->
-                <section class="section">
+                <section class="section" id="projects">
                     <h2>Eksperymentalne Przykłady Integracji AI</h2>
                     <div class="focus-grid">
                         <div class="focus-card">
@@ -1087,7 +1139,7 @@ graph TD
                 </section>
 
                 <!-- Portfolio -->
-                <section class="section">
+                <section class="section" id="portfolio">
                     <h2>Portfolio Projektów Analitycznych</h2>
                     
                     <!-- Universal Tools -->
@@ -1096,7 +1148,6 @@ graph TD
                         
                         <div class="project-card">
                             <h4>Uniwersalny Koder Jakościowy</h4>
-                            <p class="project-file">general_qual_coder_ollama_20250727.py</p>
                             <p class="project-description">Wszechstronne narzędzie wspierające analizę danych jakościowych. Skrypt automatyzuje proces kodowania – czyli przypisywania etykiet tematycznych – do fragmentów tekstu pochodzących z różnych źródeł, takich jak transkrypcje wywiadów, notatki czy dokumenty.</p>
                             
                             <div class="project-process">
@@ -1135,7 +1186,6 @@ graph TD
 
                         <div class="project-card">
                             <h4>Asystent Desk Research</h4>
-                            <p class="project-file">general_desk_researcher_gemini.py</p>
                             <p class="project-description">Zaawansowane narzędzie, które automatyzuje proces tworzenia przeglądu literatury (desk research) na potrzeby ofert i raportów badawczych. Skrypt przekształca zbiór dokumentów naukowych (PDF) i pytań badawczych w spójny, analityczny raport.</p>
                             
                             <div class="project-process">
@@ -1178,7 +1228,6 @@ graph TD
                         
                         <div class="project-card">
                             <h4>Zaawansowane Przeszukiwanie Dokumentów PDF</h4>
-                            <p class="project-file">specific_pdf_search.py</p>
                             <p class="project-description">Automatyzacja procesu wyszukiwania kluczowych informacji w dużej bazie wielojęzycznych dokumentów PDF. Narzędzie zostało stworzone na potrzeby projektu, w którym konieczne było szybkie zidentyfikowanie fragmentów tekstu dotyczących konkretnego zagadnienia w setkach plików.</p>
                             
                             <div class="project-process">
@@ -1216,7 +1265,6 @@ I --> J["Koniec: Plik Excel z wynikami"];
 
                         <div class="project-card">
                             <h4>Symulator Respondentów z Wykorzystaniem LLM</h4>
-                            <p class="project-file">specific_llm_respondent_simulator_nowa polityka.py</p>
                             <p class="project-description">Narzędzie do generowania syntetycznych, ale realistycznych danych ankietowych. Celem było zasymulowanie odpowiedzi na kwestionariusz psychologiczny (Skala Dobrostanu Ryff) w odpowiedzi na hipotetyczną zmianę w firmie (wprowadzenie nowej polityki wspierania marki osobistej pracowników).</p>
                             
                             <div class="project-process">
@@ -1247,7 +1295,6 @@ graph TD
 
                         <div class="project-card">
                             <h4>Dwustopniowa Klasyfikacja i Ekstrakcja Danych z Wniosków</h4>
-                            <p class="project-file">specific_klasyfikacja_wnioski.py</p>
                             <p class="project-description">Opracowanie wydajnego procesu do analizy setek wniosków projektowych w celu zidentyfikowania i ustrukturyzowania bardzo specyficznych informacji – w tym przypadku dotyczących zatrudnienia osób z niepełnosprawnościami.</p>
                             
                             <div class="project-process">
@@ -1281,7 +1328,6 @@ graph TD
 
                         <div class="project-card">
                             <h4>Identyfikacja Narracji i Tematów w Tekstach</h4>
-                            <p class="project-file">specific_keyword_extractor_tematy.py</p>
                             <p class="project-description">Zautomatyzowanie procesu analizy tematycznej dużej liczby krótkich tekstów, takich jak posty w mediach społecznościowych czy artykuły. Celem było sklasyfikowanie każdego wpisu pod kątem predefiniowanego zestawu narracji lub tematów (w tym przypadku związanych z Zielonym Ładem).</p>
                             
                             <div class="project-process">
@@ -1312,7 +1358,6 @@ graph TD
 
                         <div class="project-card">
                             <h4>Ekstrakcja i Strukturyzacja Danych z Protokołów Spotkań</h4>
-                            <p class="project-file">specific_data_extraction_8.py</p>
                             <p class="project-description">Zautomatyzowanie żmudnego procesu analizy protokołów z posiedzeń komitetów monitorujących. Celem było przekształcenie serii dokumentów PDF w ustrukturyzowaną bazę danych, która śledzi skład komitetu, obecność na spotkaniach oraz merytoryczną aktywność poszczególnych członków.</p>
                             
                             <div class="project-process">
@@ -1353,7 +1398,7 @@ graph TD
             </main>
 
             <!-- Contact -->
-            <footer class="contact">
+            <footer class="contact" id="contact">
                 <h2>Skontaktujmy Się</h2>
                 <div class="contact-links">
                     <a href="mailto:igor.lyubashenko@gmail.com" class="contact-link">Email</a>
@@ -1380,6 +1425,28 @@ graph TD
                 tertiaryColor: '#1a1a1a'
             }
         });
+
+        // Smooth scrolling to sections
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active navigation button
+                const allNavButtons = document.querySelectorAll('.nav-btn');
+                allNavButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                const activeButton = document.querySelector(`[onclick="scrollToSection('${sectionId}')"]`);
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
+            }
+        }
 
         // Language switching functionality
         function switchLanguage(lang) {

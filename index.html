@@ -1474,6 +1474,11 @@ graph TD
             
             // Update HTML lang attribute
             document.documentElement.lang = lang;
+            
+            // Re-initialize Mermaid for the newly visible content
+            setTimeout(() => {
+                mermaid.init(undefined, selectedContent.querySelectorAll('.mermaid'));
+            }, 100);
         }
     </script>
 </body>

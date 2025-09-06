@@ -410,6 +410,140 @@
             box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
         }
 
+        /* Portfolio styles */
+        .portfolio-category {
+            margin-bottom: 60px;
+        }
+
+        .portfolio-category h3 {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            margin-bottom: 30px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-green-dim);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.1);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .project-file {
+            color: var(--accent-green);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .project-process, .project-techniques {
+            margin-bottom: 25px;
+        }
+
+        .project-process h5, .project-techniques h5 {
+            font-size: 1.1rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .project-process p, .project-techniques p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .project-process ul, .project-process ol {
+            color: var(--text-secondary);
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .project-process li, .project-process li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .mermaid-diagram {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .mermaid {
+            text-align: center;
+        }
+
+        /* Mermaid diagram styling */
+        .mermaid .node rect {
+            fill: var(--card-bg) !important;
+            stroke: var(--accent-green) !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .node text {
+            fill: var(--text-primary) !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        }
+
+        .mermaid .edgePath .path {
+            stroke: var(--accent-green) !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .edgeLabel {
+            background: var(--card-bg) !important;
+            color: var(--text-primary) !important;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
@@ -432,6 +566,22 @@
             .language-switcher {
                 top: 10px;
                 right: 10px;
+            }
+
+            .project-card {
+                padding: 20px;
+            }
+
+            .project-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .portfolio-category h3 {
+                font-size: 1.5rem;
+            }
+
+            .mermaid-diagram {
+                padding: 15px;
             }
         }
     </style>
@@ -553,6 +703,271 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- Portfolio -->
+                <section class="section">
+                    <h2>Analytical Projects Portfolio</h2>
+                    
+                    <!-- Universal Tools -->
+                    <div class="portfolio-category">
+                        <h3>Universal Analytical Tools</h3>
+                        
+                        <div class="project-card">
+                            <h4>Universal Qualitative Coder</h4>
+                            <p class="project-file">general_qual_coder_ollama_20250727.py</p>
+                            <p class="project-description">A comprehensive tool supporting qualitative data analysis. The script automates the coding process - assigning thematic labels to text fragments from various sources such as interview transcripts, notes, or documents.</p>
+                            
+                            <div class="project-process">
+                                <h5>Process Description:</h5>
+                                <p>The tool acts as a qualitative researcher's assistant. The user first defines their "coding system" in a simple Excel file, where each code (label) has its name and definition. Then they indicate a folder with files to analyze, which can be in various formats (Excel, Word, Markdown).</p>
+                                <p>The script systematically processes each text fragment from each file. For each fragment and each defined code, it asks the Large Language Model (LLM): "Does this text match this code?" The model not only answers "YES" or "NO" but also:</p>
+                                <ul>
+                                    <li><strong>Justifies</strong> its decision</li>
+                                    <li>Generates an <strong>"insight"</strong> - interpretive insight into how the text relates to the code</li>
+                                    <li>Indicates the <strong>exact quote</strong> that best illustrates this connection</li>
+                                    <li>Determines the <strong>confidence level</strong> of its decision</li>
+                                </ul>
+                                <p>All results are collected and saved in one comprehensive Excel file, creating a rich database ready for further in-depth analysis by the researcher.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Applied Techniques:</h5>
+                                <p>Project based on <strong>Large Language Model (LLM) running locally (Ollama)</strong>. Demonstrates LLM's ability to perform complex analytical tasks requiring deep <strong>text understanding (NLU)</strong>, <strong>reasoning</strong>, and <strong>justification</strong> of decisions, mimicking the thought process of a human coder.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: System kodów (Excel) i pliki z danymi (.xlsx, .docx, .md)"] --> B{"Wczytanie i przygotowanie danych"};
+    B --> C{"Pętla po każdym fragmencie tekstu"};
+    C --> D{"Pętla po każdym kodzie z systemu"};
+    D -- "Zapytanie" --> E["Analiza przez lokalny LLM"];
+    E -- "Wynik" --> F{"Decyzja: Kodować? + Uzasadnienie, Insight, Cytat"};
+    F --> D;
+    D --> C;
+    C --> G["Agregacja wszystkich wyników"];
+    G --> H["Koniec: Zbiorczy plik Excel z zakodowanymi danymi"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>Desk Research Assistant</h4>
+                            <p class="project-file">general_desk_researcher_gemini.py</p>
+                            <p class="project-description">An advanced tool that automates the process of creating literature reviews (desk research) for research offers and reports. The script transforms a collection of scientific documents (PDF) and research questions into a coherent analytical report.</p>
+                            
+                            <div class="project-process">
+                                <h5>Process Description:</h5>
+                                <p>The tool simulates the work of an analytical team, applying an advanced three-step process for each analyzed document:</p>
+                                <ol>
+                                    <li><strong>Initial Analysis:</strong> Large Language Model (LLM) "reads" the PDF document and makes a first attempt to answer the given research questions, identifying key theses and findings.</li>
+                                    <li><strong>Critique:</strong> Then, another process (or the same model in a different role) takes on the role of a reviewer. It critiques the initial analysis, comparing it with the original document, pointing out missed information, interpretation errors, or missing details.</li>
+                                    <li><strong>Synthesis and Improvement:</strong> In the final step, the model receives both the initial analysis and its critique. Its task is to create a final, corrected and complete document analysis that takes into account all the reviewer's comments.</li>
+                                </ol>
+                                <p>After analyzing all documents in this way, the script synthesizes the collected information. It generates a comprehensive literature review in Markdown format, organized around research questions. The final report not only summarizes the state of knowledge but also actively points out <strong>research gaps</strong>, <strong>methodological challenges</strong>, and <strong>recommendations</strong> for further research.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Applied Techniques:</h5>
+                                <p>Project uses <strong>advanced LLM models available via API (Google Gemini)</strong>. Key innovation is the application of <strong>iterative process (analysis → critique → synthesis)</strong>, which significantly improves the quality and reliability of generated content. This is an example of using LLM not only for extraction but for creating new analytical knowledge.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Pytania badawcze, folder z plikami PDF"] --> B{"Pętla po każdym pliku PDF"};
+    B --> C{"Trzystopniowa analiza"};
+    C -- "Krok 1" --> D["Wstępna analiza przez Gemini API"];
+    D -- "Krok 2" --> E["Krytyka analizy przez Gemini API"];
+    E -- "Krok 3" --> F["Finalna, poprawiona synteza przez Gemini API"];
+    F --> G["Zapisanie wyniku analizy pliku"];
+    G --> B;
+    B --> H{"Synteza wszystkich analiz"};
+    H -- "Gemini API" --> I["Wygenerowanie raportu - przeglądu literatury"];
+    I --> J["Koniec: Plik Markdown z gotowym przeglądem"];
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialized Solutions -->
+                    <div class="portfolio-category">
+                        <h3>Specialized Project Solutions</h3>
+                        
+                        <div class="project-card">
+                            <h4>Advanced PDF Document Search</h4>
+                            <p class="project-file">specific_pdf_search.py</p>
+                            <p class="project-description">Automation of the process of searching for key information in a large database of multilingual PDF documents. The tool was created for a project where it was necessary to quickly identify text fragments concerning a specific topic in hundreds of files.</p>
+                            
+                            <div class="project-process">
+                                <h5>Process Description:</h5>
+                                <p>The script works like an intelligent search engine that doesn't limit itself to simple word finding. The process begins with loading an extensive list of keywords in different languages. Then, the script systematically analyzes each PDF document in the specified folder. To ensure maximum effectiveness, it uses several natural language processing (NLP) techniques:</p>
+                                <ol>
+                                    <li><strong>Text normalization:</strong> Unifies text by removing diacritics and converting everything to lowercase, allowing search to be independent of case or specific characters.</li>
+                                    <li><strong>Fuzzy matching:</strong> Finds keywords even when there are typos or minor spelling differences in the text.</li>
+                                    <li><strong>Stemming (morphological analysis):</strong> Identifies word roots, enabling it to find key phrases regardless of their grammatical form (e.g., finding "school", "schools", "school").</li>
+                                    <li><strong>N-gram analysis:</strong> Searches for word sequences, useful for finding more complex, multi-word phrases.</li>
+                                </ol>
+                                <p>Results are automatically saved in an Excel file containing information about country, document name, page number, and the exact text fragment where the match was found.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Applied Techniques:</h5>
+                                <p>This project uses <strong>classical natural language processing (NLP) techniques</strong>. The process doesn't involve large language models (LLM) but relies on proven text analysis algorithms.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD 
+A["Start: Folder z plikami PDF i lista słów kluczowych"] --> B{"Analiza każdego pliku PDF"};
+B --> C["Normalizacja tekstu"]; 
+C --> D{"Wyszukiwanie wieloetapowe"}; 
+D --> E["(1) Fuzzy Matching"]; 
+D --> F["(2) Stemming"]; 
+D --> G["(3) N-gramy"]; 
+C --> H["Ekstrakcja pasujących fragmentów"]; 
+H --> I["Zapis wyników"]; 
+I --> J["Koniec: Plik Excel z wynikami"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>LLM Respondent Simulator</h4>
+                            <p class="project-file">specific_llm_respondent_simulator_nowa polityka.py</p>
+                            <p class="project-description">A tool for generating synthetic but realistic survey data. The goal was to simulate responses to a psychological questionnaire (Ryff Well-being Scale) in response to a hypothetical change in the company (introduction of a new policy supporting employees' personal branding).</p>
+                            
+                            <div class="project-process">
+                                <h5>Process Description:</h5>
+                                <p>The script takes on the role of an "actor" who plays different characters and fills out the survey for them. The process begins with loading detailed demographic profiles (e.g., age, position, experience) and situational context. Additionally, to make responses even more credible, the script considers the "moods" prevailing in a given professional group - typical benefits, risks, and general assessment of the new policy.</p>
+                                <p>For each simulated respondent, the script creates a unique "internal monologue" (prompt) that instructs the Large Language Model (LLM) how to think and respond. The model, acting according to its assigned role, generates responses to individual survey questions on a 1-6 scale. The entire process is automated and allows for quick generation of a large database that reflects diverse attitudes and opinions.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Applied Techniques:</h5>
+                                <p>Project fully utilizes the capabilities of <strong>Large Language Model (LLM) running locally (Ollama)</strong>. This is an example of creative application of LLM for generating structured data, where the model not only creates text but makes decisions based on a complex set of guidelines.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Profile demograficzne, kwestionariusz, kontekst sytuacji"] --> B{"Tworzenie 'osobowości' dla LLM"};
+    B --> C["System Prompt: Instrukcje dla modelu"];
+    C --> D{"Pętla po pytaniach ankiety"};
+    D -- "Pytanie" --> E["Generowanie odpowiedzi przez lokalny LLM"];
+    E -- "Odpowiedź (1-6)" --> D;
+    D --> F["Zebranie wszystkich odpowiedzi"];
+    F --> G["Zapis do bazy danych"];
+    G --> H["Koniec: Plik CSV z wynikami"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>Two-Stage Classification and Data Extraction from Applications</h4>
+                            <p class="project-file">specific_klasyfikacja_wnioski.py</p>
+                            <p class="project-description">Development of an efficient process for analyzing hundreds of project applications to identify and structure very specific information - in this case concerning employment of people with disabilities.</p>
+                            
+                            <div class="project-process">
+                                <h5>Process Description:</h5>
+                                <p>The script performs the task in two intelligent steps, mimicking the work of an analyst who first reviews documents and then delves into the details of the most important ones.</p>
+                                <ol>
+                                    <li><strong>Stage 1: Quick Classification.</strong> Large Language Model (LLM) receives the task of quickly scanning text fragments and making a simple "YES/NO" decision: whether a given fragment contains clear information about employing a person with disability in the project team. This stage acts as a filter that separates potentially interesting documents from those that don't concern the topic.</li>
+                                    <li><strong>Stage 2: Deep Extraction.</strong> Fragments marked as "YES" go to the second stage. Here, LLM receives a more complex task: it must "read with understanding" the text and extract from it specific, structured data such as job dimension, number of employed people, form of employment, or position. The model must choose one of predefined options, ensuring data consistency.</li>
+                                </ol>
+                                <p>The result is a table in CSV file containing clear and analysis-ready information extracted from unstructured text.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Applied Techniques:</h5>
+                                <p>Project uses <strong>Large Language Model (LLM) running locally</strong> (via OpenAI-compatible API, e.g., LM Studio or Ollama). Key is the application of <strong>processing chain (pipeline)</strong>, where LLM is used twice for different tasks - first for broad classification, then for precise information extraction.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Plik CSV z fragmentami tekstów"] --> B{"Etap 1: Klasyfikacja"};
+    B -- "Każdy fragment" --> C["LLM: Czy zawiera info o zatrudnieniu OzN?"];
+    C -- "Decyzja TAK/NIE" --> D{"Filtrowanie"};
+    D -- "Fragmenty 'TAK'" --> E{"Etap 2: Ekstrakcja szczegółów"};
+    E -- "Każdy fragment 'TAK'" --> F["LLM: Wyodrębnij dane strukturalne"];
+    F --> G["Agregacja wyników"];
+    G --> H["Koniec: Plik CSV z ustrukturyzowanymi danymi"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>Narrative and Theme Identification in Texts</h4>
+                            <p class="project-file">specific_keyword_extractor_tematy.py</p>
+                            <p class="project-description">Automation of the process of thematic analysis of a large number of short texts, such as social media posts or articles. The goal was to classify each entry according to a predefined set of narratives or themes (in this case related to the Green Deal).</p>
+                            
+                            <div class="project-process">
+                                <h5>Process Description:</h5>
+                                <p>The script works like an analyst who reads each text and assigns it to the appropriate "drawer". The process begins with loading data from an Excel file. Then, for each row (i.e., each text), the script asks the Large Language Model (LLM) to perform a classification task.</p>
+                                <p>The model receives the text and a list of available categories (narratives or themes) along with their definitions. Its task is to understand the content and semantics of the analyzed entry and decide which category it fits best. The script is flexible - it can assign one or more (up to three) categories if the text touches on several threads simultaneously. If the content doesn't concern climate policy, it's appropriately marked.</p>
+                                <p>Results are appended as a new column in the original Excel file, facilitating further quantitative and qualitative analysis.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Applied Techniques:</h5>
+                                <p>Tool based on <strong>Large Language Model (LLM) running locally (Ollama)</strong> capabilities for understanding and categorizing text. This is an example of using LLM for <strong>multi-class text classification</strong>, where the model makes decisions based on semantic matching of content to defined categories.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Plik Excel z tekstami i system kodowania"] --> B{"Pętla po każdym tekście"};
+    B --> C["Analiza tekstu przez lokalny LLM"];
+    C --> D{"Decyzja: Do której narracji/tematu pasuje?"};
+    D --> E["Przypisanie etykiet"];
+    E --> B;
+    B --> F["Dodanie nowej kolumny z wynikami"];
+    F --> G["Koniec: Plik Excel z przypisanymi kategoriami"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>Data Extraction and Structuring from Meeting Minutes</h4>
+                            <p class="project-file">specific_data_extraction_8.py</p>
+                            <p class="project-description">Automation of the tedious process of analyzing minutes from monitoring committee meetings. The goal was to transform a series of PDF documents into a structured database that tracks committee composition, meeting attendance, and substantive activity of individual members.</p>
+                            
+                            <div class="project-process">
+                                <h5>Process Description:</h5>
+                                <p>The script works like a digital analyst assistant. First, it loads the official committee composition from a dedicated PDF file, creating a base list of members. Then, for each meeting minutes, it performs a series of advanced operations:</p>
+                                <ol>
+                                    <li><strong>Attendance list analysis:</strong> Intelligently identifies and extracts the list of meeting participants, handling various formats and tables.</li>
+                                    <li><strong>Speaker identification:</strong> Processes the main part of the minutes to identify who spoke.</li>
+                                    <li><strong>Substantive analysis:</strong> Assesses whether statements were substantive (e.g., concerning project selection criteria, fund allocation) or only organizational.</li>
+                                    <li><strong>Statement summarization:</strong> Generates concise summaries of key points raised by each active person.</li>
+                                    <li><strong>Data aggregation:</strong> All collected information is combined into one coherent database. Newly identified people (e.g., guests) are automatically added to the list.</li>
+                                </ol>
+                                <p>The result is two Excel files: one in "wide" format (ideal for reviewing activity over time) and another in "long" format (database ready for advanced analysis).</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Applied Techniques:</h5>
+                                <p>Project utilizes the powerful capabilities of <strong>multimodal Large Language Model available via API (Google Gemini)</strong>. This model can directly "read" and interpret PDF files, eliminating the need for prior text conversion. Key is using LLM for <strong>named entity recognition (NER)</strong> and <strong>advanced text understanding and summarization</strong>.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Pliki PDF (skład komitetu, protokoły)"] --> B{"Analiza składu komitetu"};
+    B -- "Gemini API" --> C["Stworzenie bazowej listy członków"];
+    C --> D{"Pętla po każdym protokole"};
+    D -- "Gemini API" --> E["Ekstrakcja listy obecności"];
+    D -- "Gemini API" --> F["Identyfikacja mówców i podsumowanie wypowiedzi"];
+    E & F --> G["Aktualizacja bazy danych o obecność i aktywność"];
+    G --> D;
+    D --> H["Zapis wyników"];
+    H --> I["Koniec: Dwa pliki Excel (format szeroki i długi)"];
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
 
             <!-- Contact -->
@@ -670,6 +1085,271 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- Portfolio -->
+                <section class="section">
+                    <h2>Portfolio Projektów Analitycznych</h2>
+                    
+                    <!-- Universal Tools -->
+                    <div class="portfolio-category">
+                        <h3>Uniwersalne Narzędzia Analityczne</h3>
+                        
+                        <div class="project-card">
+                            <h4>Uniwersalny Koder Jakościowy</h4>
+                            <p class="project-file">general_qual_coder_ollama_20250727.py</p>
+                            <p class="project-description">Wszechstronne narzędzie wspierające analizę danych jakościowych. Skrypt automatyzuje proces kodowania – czyli przypisywania etykiet tematycznych – do fragmentów tekstu pochodzących z różnych źródeł, takich jak transkrypcje wywiadów, notatki czy dokumenty.</p>
+                            
+                            <div class="project-process">
+                                <h5>Opis procesu:</h5>
+                                <p>Narzędzie to działa jako asystent badacza jakościowego. Użytkownik na początku definiuje swój "system kodów" w prostym pliku Excel, gdzie każdy kod (etykieta) ma swoją nazwę i definicję. Następnie wskazuje folder z plikami do analizy, które mogą być w różnych formatach (Excel, Word, Markdown).</p>
+                                <p>Skrypt systematycznie przetwarza każdy fragment tekstu z każdego pliku. Dla każdego fragmentu i każdego zdefiniowanego kodu, zadaje pytanie Dużemu Modelowi Językowemu (LLM): "Czy ten tekst pasuje do tego kodu?". Model nie tylko odpowiada "TAK" lub "NIE", ale także:</p>
+                                <ul>
+                                    <li><strong>Uzasadnia</strong> swoją decyzję</li>
+                                    <li>Generuje <strong>"insight"</strong> – interpretacyjny wgląd w to, jak tekst odnosi się do kodu</li>
+                                    <li>Wskazuje <strong>dokładny cytat</strong>, który najlepiej ilustruje to powiązanie</li>
+                                    <li>Określa <strong>poziom pewności</strong> swojej decyzji</li>
+                                </ul>
+                                <p>Wszystkie wyniki są zbierane i zapisywane w jednym, zbiorczym pliku Excel, co tworzy bogatą bazę danych gotową do dalszej, pogłębionej analizy przez badacza.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Zastosowane techniki:</h5>
+                                <p>Projekt opiera się na <strong>Dużym Modelu Językowym (LLM) działającym lokalnie (Ollama)</strong>. Demonstruje zdolność LLM do wykonywania złożonych zadań analitycznych, które wymagają głębokiego <strong>rozumienia tekstu (NLU)</strong>, <strong>wnioskowania</strong> i <strong>uzasadniania</strong> swoich decyzji, naśladując proces myślowy ludzkiego kodera.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: System kodów (Excel) i pliki z danymi (.xlsx, .docx, .md)"] --> B{"Wczytanie i przygotowanie danych"};
+    B --> C{"Pętla po każdym fragmencie tekstu"};
+    C --> D{"Pętla po każdym kodzie z systemu"};
+    D -- "Zapytanie" --> E["Analiza przez lokalny LLM"];
+    E -- "Wynik" --> F{"Decyzja: Kodować? + Uzasadnienie, Insight, Cytat"};
+    F --> D;
+    D --> C;
+    C --> G["Agregacja wszystkich wyników"];
+    G --> H["Koniec: Zbiorczy plik Excel z zakodowanymi danymi"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>Asystent Desk Research</h4>
+                            <p class="project-file">general_desk_researcher_gemini.py</p>
+                            <p class="project-description">Zaawansowane narzędzie, które automatyzuje proces tworzenia przeglądu literatury (desk research) na potrzeby ofert i raportów badawczych. Skrypt przekształca zbiór dokumentów naukowych (PDF) i pytań badawczych w spójny, analityczny raport.</p>
+                            
+                            <div class="project-process">
+                                <h5>Opis procesu:</h5>
+                                <p>Narzędzie to symuluje pracę zespołu analitycznego, stosując zaawansowany, trzystopniowy proces dla każdego analizowanego dokumentu:</p>
+                                <ol>
+                                    <li><strong>Wstępna Analiza:</strong> Duży Model Językowy (LLM) "czyta" dokument PDF i dokonuje pierwszej próby odpowiedzi na zadane pytania badawcze, identyfikując kluczowe tezy i ustalenia.</li>
+                                    <li><strong>Krytyka:</strong> Następnie, inny proces (lub ten sam model w innej roli) wciela się w rolę recenzenta. Krytykuje pierwszą analizę, porównując ją z oryginalnym dokumentem, wskazując na pominięte informacje, błędy w interpretacji czy brakujące szczegóły.</li>
+                                    <li><strong>Synteza i Poprawa:</strong> W ostatnim kroku, model otrzymuje zarówno wstępną analizę, jak i jej krytykę. Jego zadaniem jest stworzenie ostatecznej, poprawionej i kompletnej analizy dokumentu, która uwzględnia wszystkie uwagi recenzenta.</li>
+                                </ol>
+                                <p>Po przeanalizowaniu wszystkich dokumentów w ten sposób, skrypt syntetyzuje zebrane informacje. Generuje kompleksowy przegląd literatury w formacie Markdown, zorganizowany wokół pytań badawczych. Raport końcowy nie tylko podsumowuje stan wiedzy, ale także aktywnie wskazuje na <strong>luki badawcze</strong>, <strong>wyzwania metodologiczne</strong> i <strong>rekomendacje</strong> dotyczące dalszych badań.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Zastosowane techniki:</h5>
+                                <p>Projekt wykorzystuje <strong>zaawansowane modele LLM dostępne przez API (Google Gemini)</strong>. Kluczową innowacją jest tu zastosowanie <strong>procesu iteracyjnego (analiza → krytyka → synteza)</strong>, który znacząco podnosi jakość i wiarygodność generowanych treści. Jest to przykład wykorzystania LLM nie tylko do ekstrakcji, ale do tworzenia nowej, analitycznej wiedzy.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Pytania badawcze, folder z plikami PDF"] --> B{"Pętla po każdym pliku PDF"};
+    B --> C{"Trzystopniowa analiza"};
+    C -- "Krok 1" --> D["Wstępna analiza przez Gemini API"];
+    D -- "Krok 2" --> E["Krytyka analizy przez Gemini API"];
+    E -- "Krok 3" --> F["Finalna, poprawiona synteza przez Gemini API"];
+    F --> G["Zapisanie wyniku analizy pliku"];
+    G --> B;
+    B --> H{"Synteza wszystkich analiz"};
+    H -- "Gemini API" --> I["Wygenerowanie raportu - przeglądu literatury"];
+    I --> J["Koniec: Plik Markdown z gotowym przeglądem"];
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialized Solutions -->
+                    <div class="portfolio-category">
+                        <h3>Wyspecjalizowane Rozwiązania Projektowe</h3>
+                        
+                        <div class="project-card">
+                            <h4>Zaawansowane Przeszukiwanie Dokumentów PDF</h4>
+                            <p class="project-file">specific_pdf_search.py</p>
+                            <p class="project-description">Automatyzacja procesu wyszukiwania kluczowych informacji w dużej bazie wielojęzycznych dokumentów PDF. Narzędzie zostało stworzone na potrzeby projektu, w którym konieczne było szybkie zidentyfikowanie fragmentów tekstu dotyczących konkretnego zagadnienia w setkach plików.</p>
+                            
+                            <div class="project-process">
+                                <h5>Opis procesu:</h5>
+                                <p>Skrypt działa jak inteligentna wyszukiwarka, która nie ogranicza się do prostego znajdowania słów. Proces rozpoczyna się od wczytania obszernej listy słów kluczowych w różnych językach. Następnie, skrypt systematycznie analizuje każdy dokument PDF w zadanym folderze. Aby zapewnić maksymalną skuteczność, wykorzystuje kilka technik przetwarzania języka naturalnego (NLP):</p>
+                                <ol>
+                                    <li><strong>Normalizacja tekstu:</strong> Ujednolica tekst, usuwając znaki diakrytyczne i zamieniając wszystko na małe litery, co pozwala uniezależnić wyszukiwanie od wielkości liter czy specyficznych znaków.</li>
+                                    <li><strong>Fuzzy matching (dopasowanie przybliżone):</strong> Znajduje słowa kluczowe nawet wtedy, gdy w tekście występują literówki lub drobne różnice w pisowni.</li>
+                                    <li><strong>Stemming (analiza morfologiczna):</strong> Identyfikuje rdzeń słowa, dzięki czemu potrafi odnaleźć frazę kluczową niezależnie od jej formy gramatycznej (np. znajdując "szkoła", "szkoły", "szkole").</li>
+                                    <li><strong>Analiza n-gramów:</strong> Wyszukuje sekwencje słów, co jest przydatne do odnajdywania bardziej złożonych, wielowyrazowych fraz.</li>
+                                </ol>
+                                <p>Wyniki są automatycznie zapisywane w pliku Excel, zawierającym informacje o kraju, nazwie dokumentu, numerze strony oraz dokładny fragment tekstu, w którym znaleziono dopasowanie.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Zastosowane techniki:</h5>
+                                <p>W tym projekcie wykorzystano <strong>klasyczne techniki przetwarzania języka naturalnego (NLP)</strong>. Proces nie angażuje dużych modeli językowych (LLM), lecz opiera się na sprawdzonych algorytmach analizy tekstu.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD 
+A["Start: Folder z plikami PDF i lista słów kluczowych"] --> B{"Analiza każdego pliku PDF"};
+B --> C["Normalizacja tekstu"]; 
+C --> D{"Wyszukiwanie wieloetapowe"}; 
+D --> E["(1) Fuzzy Matching"]; 
+D --> F["(2) Stemming"]; 
+D --> G["(3) N-gramy"]; 
+C --> H["Ekstrakcja pasujących fragmentów"]; 
+H --> I["Zapis wyników"]; 
+I --> J["Koniec: Plik Excel z wynikami"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>Symulator Respondentów z Wykorzystaniem LLM</h4>
+                            <p class="project-file">specific_llm_respondent_simulator_nowa polityka.py</p>
+                            <p class="project-description">Narzędzie do generowania syntetycznych, ale realistycznych danych ankietowych. Celem było zasymulowanie odpowiedzi na kwestionariusz psychologiczny (Skala Dobrostanu Ryff) w odpowiedzi na hipotetyczną zmianę w firmie (wprowadzenie nowej polityki wspierania marki osobistej pracowników).</p>
+                            
+                            <div class="project-process">
+                                <h5>Opis procesu:</h5>
+                                <p>Skrypt wciela się w rolę "aktora", który odgrywa różne postacie i wypełnia za nie ankietę. Proces rozpoczyna się od wczytania szczegółowych profili demograficznych (np. wiek, stanowisko, doświadczenie) oraz kontekstu sytuacyjnego. Dodatkowo, aby odpowiedzi były jeszcze bardziej wiarygodne, skrypt uwzględnia "nastroje" panujące w danej grupie zawodowej – typowe korzyści, ryzyka i ogólną ocenę nowej polityki.</p>
+                                <p>Dla każdego symulowanego respondenta, skrypt tworzy unikalny "monolog wewnętrzny" (prompt), który instruuje Duży Model Językowy (LLM), jak ma myśleć i odpowiadać. Model, działając zgodnie z nadaną mu rolą, generuje odpowiedzi na poszczególne pytania ankiety w skali 1-6. Cały proces jest zautomatyzowany i pozwala na szybkie wygenerowanie dużej bazy danych, która odzwierciedla zróżnicowane postawy i opinie.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Zastosowane techniki:</h5>
+                                <p>Projekt w pełni wykorzystuje możliwości <strong>Dużego Modelu Językowego (LLM) działającego lokalnie (Ollama)</strong>. To przykład kreatywnego zastosowania LLM do generowania ustrukturyzowanych danych, gdzie model nie tylko tworzy tekst, ale podejmuje decyzje w oparciu o złożony zestaw wytycznych.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Profile demograficzne, kwestionariusz, kontekst sytuacji"] --> B{"Tworzenie 'osobowości' dla LLM"};
+    B --> C["System Prompt: Instrukcje dla modelu"];
+    C --> D{"Pętla po pytaniach ankiety"};
+    D -- "Pytanie" --> E["Generowanie odpowiedzi przez lokalny LLM"];
+    E -- "Odpowiedź (1-6)" --> D;
+    D --> F["Zebranie wszystkich odpowiedzi"];
+    F --> G["Zapis do bazy danych"];
+    G --> H["Koniec: Plik CSV z wynikami"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>Dwustopniowa Klasyfikacja i Ekstrakcja Danych z Wniosków</h4>
+                            <p class="project-file">specific_klasyfikacja_wnioski.py</p>
+                            <p class="project-description">Opracowanie wydajnego procesu do analizy setek wniosków projektowych w celu zidentyfikowania i ustrukturyzowania bardzo specyficznych informacji – w tym przypadku dotyczących zatrudnienia osób z niepełnosprawnościami.</p>
+                            
+                            <div class="project-process">
+                                <h5>Opis procesu:</h5>
+                                <p>Skrypt realizuje zadanie w dwóch inteligentnych krokach, naśladując pracę analityka, który najpierw przegląda dokumenty, a potem wczytuje się w szczegóły tych najważniejszych.</p>
+                                <ol>
+                                    <li><strong>Etap 1: Szybka Klasyfikacja.</strong> Duży Model Językowy (LLM) otrzymuje zadanie błyskawicznego przeskanowania fragmentów tekstu i podjęcia prostej decyzji "TAK/NIE": czy dany fragment zawiera jednoznaczną informację o zatrudnieniu osoby z niepełnosprawnością w zespole projektowym. Ten etap działa jak filtr, który oddziela dokumenty potencjalnie interesujące od tych, które nie dotyczą tematu.</li>
+                                    <li><strong>Etap 2: Głęboka Ekstrakcja.</strong> Fragmenty oznaczone jako "TAK" trafiają do drugiego etapu. Tutaj LLM otrzymuje bardziej złożone zadanie: musi "przeczytać ze zrozumieniem" tekst i wyodrębnić z niego konkretne, ustrukturyzowane dane, takie jak wymiar etatu, liczba zatrudnionych osób, forma zatrudnienia czy stanowisko. Model musi wybrać jedną z predefiniowanych opcji, co zapewnia spójność danych.</li>
+                                </ol>
+                                <p>Wynikiem jest tabela w pliku CSV, która zawiera przejrzyste i gotowe do analizy informacje, wyodrębnione z nieustrukturyzowanego tekstu.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Zastosowane techniki:</h5>
+                                <p>Projekt wykorzystuje <strong>Duży Model Językowy (LLM) działający lokalnie</strong> (poprzez API kompatybilne z OpenAI, np. LM Studio lub Ollama). Kluczowe jest tu zastosowanie <strong>łańcucha przetwarzania (pipeline)</strong>, gdzie LLM jest używany dwukrotnie do różnych zadań – najpierw do szerokiej klasyfikacji, a następnie do precyzyjnej ekstrakcji informacji.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Plik CSV z fragmentami tekstów"] --> B{"Etap 1: Klasyfikacja"};
+    B -- "Każdy fragment" --> C["LLM: Czy zawiera info o zatrudnieniu OzN?"];
+    C -- "Decyzja TAK/NIE" --> D{"Filtrowanie"};
+    D -- "Fragmenty 'TAK'" --> E{"Etap 2: Ekstrakcja szczegółów"};
+    E -- "Każdy fragment 'TAK'" --> F["LLM: Wyodrębnij dane strukturalne"];
+    F --> G["Agregacja wyników"];
+    G --> H["Koniec: Plik CSV z ustrukturyzowanymi danymi"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>Identyfikacja Narracji i Tematów w Tekstach</h4>
+                            <p class="project-file">specific_keyword_extractor_tematy.py</p>
+                            <p class="project-description">Zautomatyzowanie procesu analizy tematycznej dużej liczby krótkich tekstów, takich jak posty w mediach społecznościowych czy artykuły. Celem było sklasyfikowanie każdego wpisu pod kątem predefiniowanego zestawu narracji lub tematów (w tym przypadku związanych z Zielonym Ładem).</p>
+                            
+                            <div class="project-process">
+                                <h5>Opis procesu:</h5>
+                                <p>Skrypt działa jak analityk, który czyta każdy tekst i przypisuje go do odpowiedniej "szufladki". Proces rozpoczyna się od wczytania danych z pliku Excel. Następnie, dla każdego wiersza (czyli każdego tekstu), skrypt prosi Duży Model Językowy (LLM) o wykonanie zadania klasyfikacyjnego.</p>
+                                <p>Model otrzymuje tekst oraz listę dostępnych kategorii (narracji lub tematów) wraz z ich definicjami. Jego zadaniem jest zrozumienie treści i semantyki analizowanego wpisu i podjęcie decyzji, do której z kategorii pasuje on najlepiej. Skrypt jest elastyczny – potrafi przypisać jedną lub więcej (do trzech) kategorii, jeśli tekst porusza kilka wątków jednocześnie. Jeśli treść nie dotyczy polityki klimatycznej, jest odpowiednio oznaczana.</p>
+                                <p>Wyniki są dopisywane jako nowa kolumna w oryginalnym pliku Excel, co ułatwia dalszą analizę ilościową i jakościową.</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Zastosowane techniki:</h5>
+                                <p>Narzędzie opiera się na zdolnościach <strong>Dużego Modelu Językowego (LLM) działającego lokalnie (Ollama)</strong> do rozumienia i kategoryzacji tekstu. Jest to przykład zastosowania LLM do <strong>wieloklasowej klasyfikacji tekstu</strong>, gdzie model podejmuje decyzje na podstawie semantycznego dopasowania treści do zdefiniowanych kategorii.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Plik Excel z tekstami i system kodowania"] --> B{"Pętla po każdym tekście"};
+    B --> C["Analiza tekstu przez lokalny LLM"];
+    C --> D{"Decyzja: Do której narracji/tematu pasuje?"};
+    D --> E["Przypisanie etykiet"];
+    E --> B;
+    B --> F["Dodanie nowej kolumny z wynikami"];
+    F --> G["Koniec: Plik Excel z przypisanymi kategoriami"];
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>Ekstrakcja i Strukturyzacja Danych z Protokołów Spotkań</h4>
+                            <p class="project-file">specific_data_extraction_8.py</p>
+                            <p class="project-description">Zautomatyzowanie żmudnego procesu analizy protokołów z posiedzeń komitetów monitorujących. Celem było przekształcenie serii dokumentów PDF w ustrukturyzowaną bazę danych, która śledzi skład komitetu, obecność na spotkaniach oraz merytoryczną aktywność poszczególnych członków.</p>
+                            
+                            <div class="project-process">
+                                <h5>Opis procesu:</h5>
+                                <p>Skrypt działa jak cyfrowy asystent analityka. Najpierw wczytuje oficjalny skład komitetu z dedykowanego pliku PDF, tworząc bazową listę członków. Następnie, dla każdego protokołu z posiedzenia, wykonuje serię zaawansowanych operacji:</p>
+                                <ol>
+                                    <li><strong>Analiza listy obecności:</strong> Inteligentnie identyfikuje i wyodrębnia listę uczestników spotkania, radząc sobie z różnymi formatami i tabelami.</li>
+                                    <li><strong>Identyfikacja mówców:</strong> Przetwarza główną część protokołu, aby zidentyfikować, kto zabierał głos.</li>
+                                    <li><strong>Analiza merytoryczna:</strong> Ocenia, czy wypowiedzi miały charakter merytoryczny (np. dotyczyły kryteriów wyboru projektów, alokacji środków) czy tylko organizacyjny.</li>
+                                    <li><strong>Podsumowanie wypowiedzi:</strong> Generuje zwięzłe streszczenie kluczowych punktów poruszonych przez każdą aktywną osobę.</li>
+                                    <li><strong>Agregacja danych:</strong> Wszystkie zebrane informacje są łączone w jedną, spójną bazę danych. Nowo zidentyfikowane osoby (np. goście) są automatycznie dodawane do listy.</li>
+                                </ol>
+                                <p>Wynikiem są dwa pliki Excel: jeden w formacie "szerokim" (idealny do przeglądania aktywności w czasie) i drugi w formacie "długim" (baza danych gotowa do zaawansowanych analiz).</p>
+                            </div>
+                            
+                            <div class="project-techniques">
+                                <h5>Zastosowane techniki:</h5>
+                                <p>Projekt wykorzystuje potężne możliwości <strong>multimodalnego Dużego Modelu Językowego dostępnego przez API (Google Gemini)</strong>. Model ten potrafi bezpośrednio "czytać" i interpretować pliki PDF, co eliminuje potrzebę wcześniejszej konwersji do tekstu. Kluczowe jest tu wykorzystanie LLM do <strong>rozpoznawania i ekstrakcji nazwanych encji (NER)</strong> oraz do <strong>zaawansowanego rozumienia i podsumowywania tekstu</strong>.</p>
+                            </div>
+                            
+                            <div class="mermaid-diagram">
+                                <div class="mermaid">
+graph TD
+    A["Start: Pliki PDF (skład komitetu, protokoły)"] --> B{"Analiza składu komitetu"};
+    B -- "Gemini API" --> C["Stworzenie bazowej listy członków"];
+    C --> D{"Pętla po każdym protokole"};
+    D -- "Gemini API" --> E["Ekstrakcja listy obecności"];
+    D -- "Gemini API" --> F["Identyfikacja mówców i podsumowanie wypowiedzi"];
+    E & F --> G["Aktualizacja bazy danych o obecność i aktywność"];
+    G --> D;
+    D --> H["Zapis wyników"];
+    H --> I["Koniec: Dwa pliki Excel (format szeroki i długi)"];
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
 
             <!-- Contact -->
@@ -683,7 +1363,24 @@
         </div>
     </div>
 
+    <!-- Mermaid.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    
     <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#00ff88',
+                primaryTextColor: '#e0e0e0',
+                primaryBorderColor: '#00ff88',
+                lineColor: '#00ff88',
+                secondaryColor: '#141414',
+                tertiaryColor: '#1a1a1a'
+            }
+        });
+
         // Language switching functionality
         function switchLanguage(lang) {
             // Hide all language content

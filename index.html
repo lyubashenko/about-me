@@ -1174,8 +1174,8 @@ graph TD
     A["Start: System kodów (Excel) i pliki z danymi (.xlsx, .docx, .md)"] --> B{"Wczytanie i przygotowanie danych"};
     B --> C{"Pętla po każdym fragmencie tekstu"};
     C --> D{"Pętla po każdym kodzie z systemu"};
-    D --> E["Analiza przez lokalny LLM"];
-    E --> F{"Decyzja: Kodować? + Uzasadnienie, Insight, Cytat"};
+    D -- "Zapytanie" --> E["Analiza przez lokalny LLM"];
+    E -- "Wynik" --> F{"Decyzja: Kodować? + Uzasadnienie, Insight, Cytat"};
     F --> D;
     D --> C;
     C --> G["Agregacja wszystkich wyników"];
@@ -1209,13 +1209,13 @@ graph TD
 graph TD
     A["Start: Pytania badawcze, folder z plikami PDF"] --> B{"Pętla po każdym pliku PDF"};
     B --> C{"Trzystopniowa analiza"};
-    C --> D["Wstępna analiza przez Gemini API"];
-    D --> E["Krytyka analizy przez Gemini API"];
-    E --> F["Finalna, poprawiona synteza przez Gemini API"];
+    C -- "Krok 1" --> D["Wstępna analiza przez Gemini API"];
+    D -- "Krok 2" --> E["Krytyka analizy przez Gemini API"];
+    E -- "Krok 3" --> F["Finalna, poprawiona synteza przez Gemini API"];
     F --> G["Zapisanie wyniku analizy pliku"];
     G --> B;
     B --> H{"Synteza wszystkich analiz"};
-    H --> I["Wygenerowanie raportu - przeglądu literatury"];
+    H -- "Gemini API" --> I["Wygenerowanie raportu - przeglądu literatury"];
     I --> J["Koniec: Plik Markdown z gotowym przeglądem"];
                                 </div>
                             </div>
@@ -1250,15 +1250,15 @@ graph TD
                             <div class="mermaid-diagram">
                                 <div class="mermaid">
 graph TD 
-A["Start: Folder z plikami PDF i lista słów kluczowych"] --> B{"Analiza każdego pliku PDF"};
-B --> C["Normalizacja tekstu"]; 
-C --> D{"Wyszukiwanie wieloetapowe"}; 
-D --> E["(1) Fuzzy Matching"]; 
-D --> F["(2) Stemming"]; 
-D --> G["(3) N-gramy"]; 
-C --> H["Ekstrakcja pasujących fragmentów"]; 
-H --> I["Zapis wyników"]; 
-I --> J["Koniec: Plik Excel z wynikami"];
+    A["Start: Folder z plikami PDF i lista słów kluczowych"] --> B{"Analiza każdego pliku PDF"};
+    B --> C["Normalizacja tekstu"]; 
+    C --> D{"Wyszukiwanie wieloetapowe"}; 
+    D --> E["(1) Fuzzy Matching"]; 
+    D --> F["(2) Stemming"]; 
+    D --> G["(3) N-gramy"]; 
+    C --> H["Ekstrakcja pasujących fragmentów"]; 
+    H --> I["Zapis wyników"]; 
+    I --> J["Koniec: Plik Excel z wynikami"];
                                 </div>
                             </div>
                         </div>
@@ -1284,8 +1284,8 @@ graph TD
     A["Start: Profile demograficzne, kwestionariusz, kontekst sytuacji"] --> B{"Tworzenie osobowości dla LLM"};
     B --> C["System Prompt: Instrukcje dla modelu"];
     C --> D{"Pętla po pytaniach ankiety"};
-    D --> E["Generowanie odpowiedzi przez lokalny LLM"];
-    E --> D;
+    D -- "Pytanie" --> E["Generowanie odpowiedzi przez lokalny LLM"];
+    E -- "Odpowiedź (1-6)" --> D;
     D --> F["Zebranie wszystkich odpowiedzi"];
     F --> G["Zapis do bazy danych"];
     G --> H["Koniec: Plik CSV z wynikami"];
@@ -1316,10 +1316,10 @@ graph TD
                                 <div class="mermaid">
 graph TD
     A["Start: Plik CSV z fragmentami tekstów"] --> B{"Etap 1: Klasyfikacja"};
-    B --> C["LLM: Czy zawiera info o zatrudnieniu OzN?"];
-    C --> D{"Filtrowanie"};
-    D --> E{"Etap 2: Ekstrakcja szczegółów"};
-    E --> F["LLM: Wyodrębnij dane strukturalne"];
+    B -- "Każdy fragment" --> C["LLM: Czy zawiera info o zatrudnieniu OzN?"];
+    C -- "Decyzja TAK/NIE" --> D{"Filtrowanie"};
+    D -- "Fragmenty 'TAK'" --> E{"Etap 2: Ekstrakcja szczegółów"};
+    E -- "Każdy fragment 'TAK'" --> F["LLM: Wyodrębnij dane strukturalne"];
     F --> G["Agregacja wyników"];
     G --> H["Koniec: Plik CSV z ustrukturyzowanymi danymi"];
                                 </div>
@@ -1382,10 +1382,10 @@ graph TD
                                 <div class="mermaid">
 graph TD
     A["Start: Pliki PDF (skład komitetu, protokoły)"] --> B{"Analiza składu komitetu"};
-    B --> C["Stworzenie bazowej listy członków"];
+    B -- "Gemini API" --> C["Stworzenie bazowej listy członków"];
     C --> D{"Pętla po każdym protokole"};
-    D --> E["Ekstrakcja listy obecności"];
-    D --> F["Identyfikacja mówców i podsumowanie wypowiedzi"];
+    D -- "Gemini API" --> E["Ekstrakcja listy obecności"];
+    D -- "Gemini API" --> F["Identyfikacja mówców i podsumowanie wypowiedzi"];
     E --> G["Aktualizacja bazy danych o obecność i aktywność"];
     F --> G;
     G --> D;

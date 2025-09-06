@@ -1415,7 +1415,7 @@ graph TD
     <script>
         // Initialize Mermaid
         mermaid.initialize({
-            startOnLoad: true,
+            startOnLoad: false, // We'll manually initialize to control when it happens
             theme: 'dark',
             themeVariables: {
                 primaryColor: '#00ff88',
@@ -1424,6 +1424,20 @@ graph TD
                 lineColor: '#00ff88',
                 secondaryColor: '#141414',
                 tertiaryColor: '#1a1a1a'
+            }
+        });
+        
+        // Initialize Mermaid when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Store original content first
+            document.querySelectorAll('.mermaid').forEach(element => {
+                element.setAttribute('data-original', element.innerHTML);
+            });
+            
+            // Initialize only the visible diagrams (English by default)
+            const activeContent = document.querySelector('.lang-content.active');
+            if (activeContent) {
+                mermaid.init(undefined, activeContent.querySelectorAll('.mermaid'));
             }
         });
 
@@ -1477,8 +1491,26 @@ graph TD
             
             // Re-initialize Mermaid for the newly visible content
             setTimeout(() => {
+                // Remove any existing SVG elements from previous renders
+                selectedContent.querySelectorAll('.mermaid svg').forEach(svg => {
+                    svg.remove();
+                });
+                
+                // Reset mermaid diagrams to their original text state
+                selectedContent.querySelectorAll('.mermaid').forEach(element => {
+                    if (element.getAttribute('data-processed') === 'true') {
+                        element.removeAttribute('data-processed');
+                        // Restore original content if it was stored
+                        const originalContent = element.getAttribute('data-original');
+                        if (originalContent) {
+                            element.innerHTML = originalContent;
+                        }
+                    }
+                });
+                
+                // Reinitialize mermaid
                 mermaid.init(undefined, selectedContent.querySelectorAll('.mermaid'));
-            }, 100);
+            }, 150);
         }
     </script>
 </body>
